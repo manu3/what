@@ -13,6 +13,17 @@
             image: image
           }"
         />
+        
+          <v-image
+          :config="{
+            x:210,
+            y:40,
+            width:325,
+            height: 305,
+            image: cortina
+          }"
+        />
+        
       </v-layer>
       <v-layer>
         <v-line :config="configLine" />
@@ -27,6 +38,7 @@
 
 <script>
 import prueba from "../App";
+const cortinaSRC = require("../img/cortina1.png");
 let vm = {};
 let color = "red";
 export default {
@@ -93,7 +105,8 @@ export default {
         strokeWidth: 4,
         draggable: false
       },
-      image: null
+      image: null,
+      cortina: null,
     };
   },
   methods: {
@@ -115,7 +128,12 @@ export default {
   },
   created() {
     const image = new window.Image();
-     image.src = "https://wallpaperstock.net/wallpapers/thumbs1/44468wide.jpg";
+    const cortina = new window.Image();
+    cortina.src = cortinaSRC;
+    cortina.onload = () => {
+      this.cortina = cortina ;
+    }
+    image.src = "https://wallpaperstock.net/wallpapers/thumbs1/44468wide.jpg";
     image.onload = () => {
       // set image only when it is loaded
       this.image = image;
